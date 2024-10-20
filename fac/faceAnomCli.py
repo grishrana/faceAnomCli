@@ -1,5 +1,6 @@
 import click
 import cv2 as cv
+from .Scripts import blurframe, webcam
 
 
 @click.group(invoke_without_command=True)
@@ -13,11 +14,16 @@ def main(ctx):
 
         capture = cv.VideoCapture(0)
 
+        if not capture.isOpened():
+            print("Cannot Open Camera")
+            return 1
+
         while True:
             isTrue, frame = capture.read()
 
             if isTrue:
-                cv.imshow("Preview", frame)
+                flipped_frame = blurframe.blurframe(frame)
+                cv.imshow("Preview", flipped_frame)
 
                 if cv.waitKey(1) == ord("q"):
                     break
@@ -29,9 +35,4 @@ def main(ctx):
         cv.destroyAllWindows()
 
 
-@click.command()
-def other_commands():
-    pass
-
-
-main.add_command(other_commands)
+main.add_command(webcam.webcam)
