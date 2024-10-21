@@ -12,7 +12,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install fac.
 ```bash
 git clone https://github.com/grishrana/faceAnomCli.git
 cd faceAnomCli
-pip install -e
+pip install -e .
 ```
 
 ## Usage
