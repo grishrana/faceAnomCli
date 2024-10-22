@@ -17,7 +17,16 @@ now = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
     type=click.Path(writable=True),
     help="Enter output filename or path/filename",
 )
-def webcam(outpath):
+@click.option(
+    "-fl",
+    "--flip",
+    "flip_webcam",
+    default=1,
+    show_default="1",
+    type=click.IntRange(0, 1),
+    help="1: Flips 0: Doesnot flips webcam",
+)
+def webcam(outpath, flip_webcam):
     capture = cv.VideoCapture(0)
 
     ## webcam width and height define the codec and create VideoWriter object
@@ -44,7 +53,7 @@ def webcam(outpath):
 
         if isTrue:
 
-            flipped_frame = blurframe.blurframe(frame)
+            flipped_frame = blurframe.blurframe(frame, flip_webcam)
 
             writer.write(flipped_frame)
             cv.imshow(f"Recording {outpath}", flipped_frame)

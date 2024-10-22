@@ -7,8 +7,11 @@ path = os.path.dirname(__file__)
 harr_class = cv.CascadeClassifier(os.path.join(path, filename))
 
 
-def blurframe(frame):
-    frame = cv.flip(frame, 1)
+def blurframe(frame, flip=1):
+
+    if flip:
+        frame = cv.flip(frame, flip)  # flips the webcam horizontally
+
     gray_frame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
     face_rect = harr_class.detectMultiScale(gray_frame, scaleFactor=1.1, minNeighbors=3)
