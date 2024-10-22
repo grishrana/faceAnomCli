@@ -1,6 +1,6 @@
 import click
 import cv2 as cv
-from .Scripts import blurframe, webcam
+from .Scripts import blurframe, webcam, image
 
 
 @click.group(invoke_without_command=True)
@@ -36,3 +36,4 @@ def main(ctx):
 
 
 main.add_command(webcam.webcam)
+main.add_command(image.image)
