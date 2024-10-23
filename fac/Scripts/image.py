@@ -12,7 +12,7 @@ from . import blurframe
     "--output",
     "output",
     default=None,
-    show_default="{img_name}_fac.{img_extension}",
+    show_default="fac_{img_name}.{img_extension}",
     type=click.Path(writable=True),
     help="Enter output path for image",
 )
@@ -25,7 +25,7 @@ def image(img_path, output):
         if len(img_name) < 2:
             sys.exit("Enter path with image file.")
 
-        img_name[0] = f"{img_name[0]}_fac"
+        img_name[0] = f"fac_{img_name[0]}"
         output = ".".join(img_name)
 
     else:
